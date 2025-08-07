@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento - Barbearia Kings</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1><a href="/index.html">Barbearia Kings 💈 </h1> </a>
+        <nav>
+            <ul>
+                <li><a href="cortes.html">Cortes</a></li>
+                <li><a href="loja.html">Loja</a></li>
+                <li><a href="agendamento.html" class="cta-button">Agendar</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="agendamento-pagina">
+            <h2>Agende seu Horário</h2>
+            <form>
+                <fieldset>
+                    <legend>Escolha o Barbeiro</legend>
+                    <div class="radio-group">
+                        <div>
+                            <input type="radio" id="barbeiro1" name="barbeiro" value="Wesley" checked>
+                            <label for="barbeiro1">Wesley</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="barbeiro2" name="barbeiro" value="Vittor">
+                            <label for="barbeiro2">Vittor</label>
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <label for="nome">Nome Completo</label>
+                <input type="text" id="nome" name="nome" required>
+
+                <label for="telefone">Telefone (WhatsApp)</label>
+                <input type="tel" id="telefone" name="telefone" required>
+
+                <label for="data">Data</label>
+                <input type="date" id="data" name="data" required>
+
+                <label for="hora">Hora</label>
+                <input type="time" id="hora" name="hora" required>
+
+                <button type="submit">Confirmar Agendamento</button>
+            </form>
+            <div class="voltar-link">
+                <a href="index.html">&larr; Voltar para a página inicial</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Barbearia Kings - Todos os direitos reservados.</p>
+        <p>Contato: (XX) 9XXXX-XXXX | Siga-nos: @barbeariakings10</p>
+    </footer>
+    <script>
+  document.querySelector('#agendamento-pagina form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Impede o envio padrão do formulário
+
+    // Captura os valores do formulário
+    const nome = document.getElementById('nome').value;
+    const telefone = document.getElementById('telefone').value;
+    const data = document.getElementById('data').value;
+    const hora = document.getElementById('hora').value;
+    const barbeiro = document.querySelector('input[name="barbeiro"]:checked').value;
+
+    // Formata a mensagem (use %0A para quebras de linha e * para negrito no WhatsApp)
+    const mensagem = `*NOVO AGENDAMENTO*%0A%0A` +
+                     `*Cliente:* ${nome}%0A` +
+                     `*Telefone:* ${telefone}%0A` +
+                     `*Barbeiro:* ${barbeiro}%0A` +
+                     `*Data:* ${formatarData(data)}%0A` +
+                     `*Horário:* ${hora}`;
+
+    // Número do WhatsApp do barbeiro (substitua pelo número real)
+    const numeroWhatsApp = "558881862286"; 
+
+    // Gera o link do WhatsApp
+    const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagem}`;
+
+    // Redireciona para o WhatsApp
+    window.location.href = urlWhatsApp;
+  });
+
+  // Função para formatar data (DD/MM/AAAA)
+  function formatarData(data) {
+    const [ano, mes, dia] = data.split('-');
+    return `${dia}/${mes}/${ano}`;
+  }
+</script>
+</body>
+</html>

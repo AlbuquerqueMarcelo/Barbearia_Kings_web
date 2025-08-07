@@ -1,0 +1,198 @@
+/* Definição das variáveis de cores */
+:root {
+    --azul-escuro: #2F68B1;
+    --vermelho-vibrante: #E5343C;
+    --branco: #FFFFFF;
+    --preto: #000000;
+    --cinza-claro: #B3B3B3;
+    --cinza-fundo: #f0f0f0; 
+}
+
+/* Reset e Estilos Globais */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Montserrat', sans-serif; background-color: var(--branco); color: var(--preto); line-height: 1.6; }
+h1, h2, h3 { font-family: 'Oswald', sans-serif; text-transform: uppercase; }
+section { padding: 80px 40px; text-align: center; }
+
+/* Header */
+header { background-color: var(--preto); color: var(--branco); padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 5px solid var(--azul-escuro); position: relative; z-index: 10; flex-wrap: wrap; }
+header .logo { display: flex; align-items: center; }
+header h1 { font-size: 2rem; color: var(--branco); }
+
+/* ESTILO ADICIONADO PARA O TÍTULO CLICÁVEL */
+header h1 a {
+    color: inherit; /* Herda a cor branca do h1 */
+    text-decoration: none; /* Remove o sublinhado */
+    transition: color 0.3s ease;
+}
+header h1 a:hover {
+    color: var(--vermelho-vibrante); /* Efeito ao passar o mouse */
+}
+
+header nav ul { list-style: none; display: flex; align-items: center; flex-wrap: wrap; }
+header nav ul li { margin-left: 20px; }
+header nav ul li a { color: var(--branco); text-decoration: none; font-size: 1.1rem; font-weight: 700; padding: 5px 10px; border-radius: 5px; transition: color 0.3s; }
+header nav ul li a:hover { color: var(--vermelho-vibrante); }
+header nav ul li a.cta-button { background-color: var(--vermelho-vibrante); color: var(--branco); padding: 10px 20px; transition: background-color 0.3s, color 0.3s; }
+header nav ul li a.cta-button:hover { background-color: var(--branco); color: var(--vermelho-vibrante); }
+
+/* Hero Banner */
+#hero-banner { background-image: linear-gradient(to right, rgba(0, 0, 0, 0.8) 30%, rgba(0, 0, 0, 0.2)), url('../assets/banner.jpeg'); height: 70vh; background-size: cover; background-position: center; display: flex; justify-content: flex-start; align-items: center; color: var(--branco); text-align: left; padding: 0 40px; }
+.banner-content { max-width: 650px; }
+.banner-content h2 { font-size: 3.5rem; margin-bottom: 15px; text-shadow: 2px 2px 8px rgba(0,0,0,0.7); }
+.banner-content p { font-size: 1.4rem; font-family: 'Montserrat', sans-serif; text-transform: none; max-width: 600px; margin: 0 0 30px 0; text-shadow: 1px 1px 4px rgba(0,0,0,0.7); }
+.banner-cta-button { background-color: var(--vermelho-vibrante); color: var(--branco); padding: 15px 35px; font-size: 1.2rem; text-decoration: none; border-radius: 5px; font-family: 'Oswald', sans-serif; text-transform: uppercase; transition: transform 0.3s ease, background-color 0.3s ease; display: inline-block; }
+.banner-cta-button:hover { transform: translateY(-3px); background-color: #c42a32; }
+
+/* Serviços */
+#servicos { background-color: var(--cinza-fundo); }
+#servicos h2, #quem-somos h2, #contato h2, #galeria-cortes h2, #loja-pagina h2 { font-size: 2.5rem; margin-bottom: 40px; color: var(--preto); }
+.servicos-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+.servico-card { background-color: var(--branco); padding: 30px 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.servico-card:hover { transform: translateY(-10px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+.servico-icon { font-size: 2.5rem; margin-bottom: 15px; background-color: var(--azul-escuro); color: var(--branco); width: 70px; height: 70px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-left: auto; margin-right: auto; }
+.servico-card h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--preto); }
+.servico-card p { font-family: 'Montserrat', sans-serif; text-transform: none; color: #555; font-size: 0.95rem; }
+.servicos-cta { margin-top: 50px; }
+.servicos-cta p { font-size: 1.2rem; margin-bottom: 20px; font-weight: 500; }
+
+/* Quem Somos */
+#quem-somos { background-color: var(--branco); }
+.quem-somos-container { display: flex; align-items: center; justify-content: center; gap: 60px; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; }
+.quem-somos-texto { flex: 1; min-width: 300px; text-align: left; }
+.quem-somos-texto h2 { margin-bottom: 20px; }
+.quem-somos-texto p { font-family: 'Montserrat', sans-serif; text-transform: none; margin-bottom: 20px; line-height: 1.8; }
+.quem-somos-texto .banner-cta-button { margin-top: 20px; }
+.quem-somos-equipe { flex: 1; min-width: 300px; }
+.equipe-carousel-container { position: relative; height: 550px; width: 100%; max-width: 400px; margin: 0 auto; }
+.barbeiro-card { background-color: var(--cinza-fundo); width: 100%; height: 100%; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.8s ease-in-out; }
+.barbeiro-card.active { opacity: 1; }
+.barbeiro-card img { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 5px solid var(--azul-escuro); margin-bottom: 20px; }
+.barbeiro-card h3 { font-size: 1.8rem; margin-bottom: 5px; }
+.barbeiro-card .especialidade { font-family: 'Montserrat', sans-serif; text-transform: none; color: var(--vermelho-vibrante); font-weight: 700; margin-bottom: 15px; }
+.barbeiro-social { margin-top: 20px; }
+.barbeiro-social a { color: var(--azul-escuro); text-decoration: none; font-weight: 700; font-size: 1rem; padding: 8px 15px; border: 2px solid var(--azul-escuro); border-radius: 20px; transition: background-color 0.3s, color 0.3s; }
+.barbeiro-social a:hover { background-color: var(--azul-escuro); color: var(--branco); }
+
+/* Contato */
+#contato { background-color: var(--cinza-fundo); }
+.contato-container { display: flex; gap: 50px; max-width: 1200px; margin: 0 auto; text-align: left; flex-wrap: wrap; }
+.contato-form, .contato-info { flex: 1; min-width: 300px; }
+#contato h3 { font-size: 1.5rem; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid var(--azul-escuro); display: inline-block; }
+.contato-form label { font-family: 'Montserrat', sans-serif; font-weight: 700; display: block; margin-bottom: 5px; }
+.contato-form input, .contato-form textarea { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid var(--cinza-claro); border-radius: 5px; font-size: 1rem; font-family: 'Montserrat', sans-serif; }
+.contato-form button { width: 100%; padding: 15px; font-size: 1.1rem; cursor: pointer; }
+.mapa-container { width: 100%; height: 300px; border-radius: 8px; overflow: hidden; margin-bottom: 20px; border: 3px solid var(--azul-escuro); }
+.mapa-container iframe { width: 100%; height: 100%; border: 0; }
+.social-buttons { display: flex; gap: 20px; margin-top: 20px; }
+.social-btn { flex-grow: 1; text-align: center; padding: 15px; text-decoration: none; color: var(--branco); font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 1.1rem; border-radius: 5px; transition: opacity 0.3s; }
+.social-btn:hover { opacity: 0.8; }
+.social-btn.instagram { background-color: #E1306C; }
+.social-btn.whatsapp { background-color: #25D366; }
+
+/* Galeria Cortes e Loja */
+#galeria-cortes, #loja-pagina { background-color: var(--cinza-fundo); }
+.subtitulo-galeria, .subtitulo-loja { font-size: 1.2rem; color: #555; margin-bottom: 50px; }
+.categoria-titulo { font-size: 2rem; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 3px solid var(--azul-escuro); display: inline-block; }
+.grid-cortes { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; max-width: 1400px; margin: 0 auto 60px auto; }
+.item-corte { position: relative; border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.2); cursor: pointer; }
+.item-corte img { width: 100%; height: 400px; object-fit: cover; display: block; transition: transform 0.4s ease; }
+.item-corte:hover img { transform: scale(1.05); }
+.nome-corte { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(0,0,0,0.9) 20%, transparent); color: var(--branco); padding: 40px 20px 20px 20px; text-align: left; font-size: 1.6rem; transition: background 0.3s; }
+
+/* Catalogo Loja */
+.catalogo-produtos-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+.catalogo-item { background-color: var(--branco); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.catalogo-item:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+.catalogo-item img { width: 100%; height: 200px; object-fit: cover; }
+.catalogo-item .content-wrapper { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; }
+.catalogo-item h3 { font-size: 1.4rem; color: var(--preto); margin-bottom: 10px; }
+.catalogo-item p { color: #555; margin-bottom: 15px; flex-grow: 1; }
+.catalogo-item .preco { font-family: 'Oswald', sans-serif; font-size: 1.6rem; font-weight: 700; color: var(--azul-escuro); display: block; margin-bottom: 15px; }
+.catalogo-item .comprar-button { background-color: var(--vermelho-vibrante); color: var(--branco); border: none; padding: 12px 20px; border-radius: 5px; cursor: pointer; font-size: 1rem; font-weight: 700; text-transform: uppercase; transition: background-color 0.3s ease; align-self: center; }
+.catalogo-item .comprar-button:hover { background-color: #c42a32; }
+
+/* Agendamento */
+#agendamento-pagina { background-color: var(--preto); color: var(--branco); padding: 60px 20px; }
+#agendamento-pagina form { max-width: 500px; margin: 0 auto; text-align: left; }
+#agendamento-pagina fieldset { border: 2px solid var(--azul-escuro); padding: 20px; margin-bottom: 20px; border-radius: 5px; }
+#agendamento-pagina legend { padding: 0 10px; font-family: 'Oswald', sans-serif; font-size: 1.2rem; text-transform: uppercase; color: var(--branco); }
+#agendamento-pagina .radio-group { display: flex; gap: 30px; justify-content: center; align-items: center; padding: 10px 0; }
+#agendamento-pagina .radio-group label { font-size: 1.1rem; cursor: pointer; }
+#agendamento-pagina .radio-group input { margin-right: 8px; cursor: pointer; }
+#agendamento-pagina label { display: block; margin-bottom: 5px; font-weight: 700; color: var(--cinza-claro); }
+#agendamento-pagina input, #agendamento-pagina button { width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 5px; border: 1px solid var(--cinza-claro); font-size: 1rem; font-family: 'Montserrat', sans-serif; }
+#agendamento-pagina input[type="text"], #agendamento-pagina input[type="tel"], #agendamento-pagina input[type="date"], #agendamento-pagina input[type="time"] { background-color: #333; color: var(--branco); border-color: var(--cinza-claro); }
+#agendamento-pagina button { background-color: var(--vermelho-vibrante); color: var(--branco); border: none; cursor: pointer; font-family: 'Oswald', sans-serif; text-transform: uppercase; font-size: 1.2rem; font-weight: 700; transition: background-color 0.3s ease; }
+#agendamento-pagina button:hover { background-color: #c42a32; }
+.voltar-link { text-align: center; margin-top: 20px; }
+.voltar-link a { color: var(--azul-escuro); text-decoration: none; font-weight: 700; }
+.voltar-link a:hover { text-decoration: underline; }
+
+/* Footer */
+footer { background-color: #1a1a1a; color: var(--cinza-claro); text-align: center; padding: 20px; border-top: 5px solid #222; }
+
+/* Botão CTA Duplicado - Removido pois já estava no header nav ul li a.cta-button */
+/* O estilo abaixo era redundante e foi integrado */
+/* .cta-button { ... } */
+
+
+/* ==========================================================================
+   MEDIA QUERIES - RESPONSIVIDADE
+   ========================================================================== */
+
+/* Telas de Tablet (até 992px) */
+@media (max-width: 992px) {
+    section { padding: 60px 30px; }
+    .banner-content h2 { font-size: 3rem; }
+    .banner-content p { font-size: 1.2rem; }
+    .quem-somos-container { flex-direction: column; gap: 40px; }
+    .quem-somos-texto { text-align: center; }
+    #contato h3, .quem-somos-texto h2 { display: table; margin-left: auto; margin-right: auto; }
+}
+
+/* Telas de Celular (até 768px) */
+@media (max-width: 768px) {
+    header { flex-direction: column; gap: 15px; padding: 20px; }
+    header nav ul { justify-content: center; padding: 0; }
+    header nav ul li { margin: 0 10px; }
+
+    #hero-banner { padding: 0 20px; text-align: center; justify-content: center; height: 60vh; }
+    .banner-content { text-align: center; }
+    .banner-content h2 { font-size: 2.5rem; }
+    .banner-content p { font-size: 1.1rem; max-width: 100%; }
+    
+    section { padding: 50px 20px; }
+    #servicos h2, #quem-somos h2, #contato h2, #galeria-cortes h2, #loja-pagina h2 { font-size: 2.2rem; }
+
+    .contato-container { flex-direction: column; gap: 40px; }
+    .social-buttons { flex-direction: column; }
+    
+    .grid-cortes { grid-template-columns: 1fr; }
+    .item-corte img { height: 350px; }
+    .nome-corte { font-size: 1.4rem; }
+    .categoria-titulo { font-size: 1.8rem; }
+    
+    .equipe-carousel-container { height: auto; }
+    .barbeiro-card { position: static; opacity: 1; margin-bottom: 20px; }
+    .barbeiro-card:not(:last-child) { margin-bottom: 20px; }
+    .active { /* Não é mais necessário com a remoção do carrossel em mobile */ }
+
+    footer p { font-size: 0.9rem; }
+}
+
+/* Telas de Celular Pequeno (até 480px) */
+@media (max-width: 480px) {
+    header h1 { font-size: 1.8rem; text-align: center; }
+    header nav ul li { margin-bottom: 10px; }
+    header nav ul li a { font-size: 1rem; }
+    header nav ul li a.cta-button { padding: 8px 15px; }
+
+    .banner-content h2 { font-size: 2rem; }
+    .banner-content p { font-size: 1rem; }
+    .banner-cta-button { padding: 12px 25px; font-size: 1rem; }
+    
+    #servicos h2, #quem-somos h2, #contato h2, #galeria-cortes h2, #loja-pagina h2 { font-size: 2rem; }
+    
+    #agendamento-pagina .radio-group { flex-direction: column; gap: 15px; align-items: flex-start; }
+}
