@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Barbearia Kings</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1><a href="../index.html">Barbearia Kings 💈</a></h1>
+        <nav>
+            <ul>
+                <li><a href="cortes.html">Cortes</a></li>
+                <li><a href="loja.html">Loja</a></li>
+                <li><a href="agendamento.html" class="cta-button">Agendar</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="pagina-login">
+            <div class="login-container">
+                <h2>Acesso Restrito</h2>
+                <p>Esta área é exclusiva para a equipe da Barbearia Kings.</p>
+                <form id="form-login">
+                    <label for="senha">Senha de Acesso</label>
+                    <input type="password" id="senha" required placeholder="Digite a senha">
+                    <button type="submit">Entrar</button>
+                    <p id="mensagem-erro" class="mensagem-erro"></p>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Barbearia Kings - Todos os direitos reservados.</p>
+    </footer>
+
+<script>
+    // --- IMPORTANTE: TROQUE A SENHA PADRÃO AQUI ---
+    const SENHA_CORRETA = 'kings123';
+    // ---------------------------------------------
+
+    const form = document.getElementById('form-login');
+    const inputSenha = document.getElementById('senha');
+    const mensagemErro = document.getElementById('mensagem-erro');
+
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Impede o envio do formulário
+        
+        const senhaDigitada = inputSenha.value;
+
+        if (senhaDigitada === SENHA_CORRETA) {
+            // Se a senha estiver correta, redireciona para a página de pedidos
+            window.location.href = 'admin_pedidos.html';
+        } else {
+            // Se a senha estiver errada, mostra uma mensagem
+            mensagemErro.textContent = 'Senha incorreta. Tente novamente.';
+            inputSenha.focus();
+        }
+    });
+</script>
+</body>
+</html>

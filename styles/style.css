@@ -418,3 +418,124 @@ footer { background-color: #1a1a1a; color: var(--cinza-claro); text-align: cente
     
     #agendamento-pagina .radio-group { flex-direction: column; gap: 15px; align-items: flex-start; }
 }
+/* ==========================================================================
+   INÍCIO - ESTILOS DO SISTEMA DE AGENDAMENTO E LOGIN
+   ========================================================================== */
+
+/* Página de Login */
+.pagina-login {
+    background-color: var(--preto);
+    color: var(--branco);
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-container {
+    max-width: 400px;
+    width: 100%;
+    padding: 40px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    border: 1px solid #333;
+    text-align: center;
+}
+.login-container h2 {
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+.login-container p {
+    margin-bottom: 25px;
+    color: var(--cinza-claro);
+}
+.login-container form {
+    text-align: left;
+}
+.login-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 700;
+    color: var(--cinza-claro);
+}
+.login-container input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid var(--cinza-claro);
+    font-size: 1rem;
+    background-color: #333;
+    color: var(--branco);
+}
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--azul-escuro);
+    color: var(--branco);
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.login-container button:hover {
+    background-color: #25558f;
+}
+.mensagem-erro {
+    color: var(--vermelho-vibrante);
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 700;
+    height: 1em; /* Reserva espaço para a mensagem não empurrar o layout */
+}
+
+
+/* Tabela de horários na página de agendamento */
+.tabela-horarios-container { background-color: #333; border: 1px solid var(--cinza-claro); border-radius: 5px; padding: 15px; margin-top: 10px; }
+#tabela-horarios { width: 100%; border-collapse: collapse; color: var(--branco); }
+#tabela-horarios th, #tabela-horarios td { padding: 12px; text-align: center; border-bottom: 1px solid #555; }
+#tabela-horarios th { font-family: 'Oswald', sans-serif; color: var(--azul-escuro); font-size: 1.1rem; }
+#tabela-horarios td:first-child { font-weight: 700; font-size: 1.1rem; }
+.btn-agendar { background-color: var(--vermelho-vibrante); color: var(--branco); border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; font-weight: 700; text-transform: uppercase; transition: background-color 0.3s ease; }
+.btn-agendar:hover { background-color: #c42a32; }
+
+/* Estilos das Páginas de Administração */
+.admin-pagina { background-color: var(--cinza-fundo); color: var(--preto); padding: 60px 20px; min-height: 70vh; }
+.admin-pagina h2 { color: var(--preto); }
+.admin-container { max-width: 900px; margin: 40px auto; text-align: left; }
+.lista-cards { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.agendamento-card { background-color: var(--branco); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-left: 5px solid var(--azul-escuro); display: flex; flex-direction: column; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.agendamento-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
+.card-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #eee; }
+.cliente-nome { font-family: 'Oswald', sans-serif; font-size: 1.4rem; color: var(--preto); margin: 0; }
+.barbeiro-tag { background-color: var(--cinza-fundo); color: #555; font-size: 0.8rem; font-weight: 700; padding: 4px 10px; border-radius: 12px; }
+.card-body { padding: 20px; flex-grow: 1; }
+.card-body p { margin-bottom: 10px; }
+.card-footer { padding: 15px 20px; background-color: #f9f9f9; display: flex; gap: 10px; border-top: 1px solid #eee; border-radius: 0 0 8px 8px; }
+.btn-admin { flex-grow: 1; border: 2px solid transparent; padding: 10px 15px; border-radius: 5px; cursor: pointer; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; font-family: 'Oswald', sans-serif; transition: all 0.3s ease; }
+.btn-aceitar { background-color: var(--azul-escuro); color: var(--branco); }
+.btn-aceitar:hover { background-color: #25558f; transform: translateY(-2px); }
+.btn-recusar { background-color: var(--vermelho-vibrante); color: var(--branco); }
+.btn-recusar:hover { background-color: #c42a32; transform: translateY(-2px); }
+.btn-status { background-color: transparent; color: var(--azul-escuro); border-color: var(--azul-escuro); }
+.btn-status:hover { background-color: var(--azul-escuro); color: var(--branco); }
+.btn-status-reabrir { background-color: transparent; color: #555; border-color: #ccc; }
+.btn-status-reabrir:hover { background-color: #555; color: var(--branco); }
+.card-vazio { grid-column: 1 / -1; text-align: center; padding: 40px; background-color: var(--branco); border-radius: 8px; color: #888; font-style: italic; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.agendamento-card.status-concluido { border-left-color: var(--cinza-claro); background-color: #fdfdfd; }
+.agendamento-card.status-concluido .card-header, .agendamento-card.status-concluido .card-body { opacity: 0.6; }
+
+/* ==========================================================================
+   FIM - ESTILOS DO SISTEMA DE AGENDAMENTO
+   ========================================================================== */
+
+/* Footer */
+footer { background-color: #1a1a1a; color: var(--cinza-claro); text-align: center; padding: 20px; border-top: 5px solid #222; }
+
+/* Media Queries */
+@media (max-width: 768px) {
+    header { flex-direction: column; gap: 15px; }
+    header nav ul { justify-content: center; }
+}
