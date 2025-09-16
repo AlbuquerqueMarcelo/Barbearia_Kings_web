@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin: Pedidos Pendentes - Barbearia Kings</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1><a href="../index.html">Barbearia Kings 💈</a></h1>
+        <nav>
+            <ul>
+                <li><a href="admin_pedidos.html" class="cta-button">Pedidos Pendentes</a></li>
+                <li><a href="admin_agenda.html">Agenda Confirmada</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="admin-pagina">
+            <h2>Pedidos de Agendamento Pendentes</h2>
+            <div class="admin-container">
+                <ul id="lista-pedidos" class="lista-cards">
+                    </ul>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Barbearia Kings - Todos os direitos reservados.</p>
+    </footer>
+
+<script>
+    // --- IMPORTANTE: CONFIGURE OS NÚMEROS AQUI ---
+    const numerosBarbeiros = {
+        "Wesley": "5588912345678", // Troque pelo número do Wesley com código do país
+        "Vittor": "5588987654321"  // Troque pelo número do Vittor com código do país
+    };
+    // ---------------------------------------------
+
+    const ul = document.getElementById("lista-pedidos");
+    let lista = JSON.parse(localStorage.getItem("agendamentos")) || [];
+
+    function atualizarLista() {
+        ul.innerHTML = "";
+        if (lista.length === 0) {
+            ul.innerHTML = "<li class='card-vazio'>Nenhum pedido de agendamento pendente.</li>";
+            return;
+        }
+
+        lista.forEach((item, index) => {
+            let li = document.createElement("li");
+            li.className = 'agendamento-card';
+            li.innerHTML = `
+                <div class="card-header">
+                    <h3 class="cliente-nome">${item.Cliente}</h3>
+                    <span class="barbeiro-tag">${item.Barbeiro}</span>
+                </div>
+                <div class="card-body">
+                    <p><strong><i class="icon-horario"></i> Horário:</strong> ${item.Horario}</p>
+                    <p><strong><i class="icon-contato"></i> Contato:</strong> ${item.Numero}</p>
+                </div>
+                <div class="card-footer">
+                    <button class="btn-admin btn-aceitar" onclick="aceitar(${index})">✓ Aceitar</button>
+                    <button class="btn-admin btn-recusar" onclick="recusar(${index})">✗ Recusar</button>
+                </div>`;
+            ul.appendChild(li);
+        });
+    }
+
+    function formatarNumero(numero) {
+        numero = numero.replace(/\D/g,'');
+        if (!numero.startsWith("55")) {
+            numero = "55" + numero;
+        }
+        return numero;
+    }
+
+    function enviarMensagemWhatsApp(numero, mensagem) {
+        const mensagemFormatada = encodeURIComponent(mensagem);
+        const urlWhatsApp = `https://wa.me/${numero}?text=${mensagemFormatada}`;
+        window.open(urlWhatsApp, "_blank");
+    }
+
+    function aceitar(index) {
+        const agendamento = lista[index];
+        const numeroCliente = formatarNumero(agendamento.Numero);
+        const mensagem = `Olá ${agendamento.Cliente}! 👋\nSeu horário na Barbearia Kings foi *CONFIRMADO*.\n\nDetalhes:\n*Barbeiro:* ${agendamento.Barbeiro}\n*Horário:* ${agendamento.Horario}\n\nAté breve! 💈`;
+        
+        enviarMensagemWhatsApp(numeroCliente, mensagem);
+
+        let aceitos = JSON.parse(localStorage.getItem("aceitos")) || [];
+        aceitos.push({...agendamento, Status: "Pendente"});
+        localStorage.setItem("aceitos", JSON.stringify(aceitos));
+
+        lista.splice(index, 1);
+        localStorage.setItem("agendamentos", JSON.stringify(lista));
+        
+        atualizarLista();
+    }
+
+    function recusar(index) {
+        const agendamento = lista[index];
+        const numeroCliente = formatarNumero(agendamento.Numero);
+        const mensagem = `Olá ${agendamento.Cliente}. 😔\nInfelizmente, seu horário das ${agendamento.Horario} com ${agendamento.Barbeiro} na Barbearia Kings *não pôde ser confirmado*.\nPor favor, tente outro horário em nosso site.`;
+
+        enviarMensagemWhatsApp(numeroCliente, mensagem);
+
+        lista.splice(index, 1);
+        localStorage.setItem("agendamentos", JSON.stringify(lista));
+        
+        atualizarLista();
+    }
+
+    atualizarLista();
+</script>
+</body>
+</html>

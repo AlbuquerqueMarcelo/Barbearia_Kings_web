@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin: Agenda Confirmada - Barbearia Kings</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1><a href="../index.html">Barbearia Kings 💈</a></h1>
+        <nav>
+            <ul>
+                <li><a href="admin_pedidos.html">Pedidos Pendentes</a></li>
+                <li><a href="admin_agenda.html" class="cta-button">Agenda Confirmada</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="admin-pagina">
+            <h2>Agenda de Horários Confirmados</h2>
+            <div class="admin-container">
+                <ul id="lista-aceitos" class="lista-cards">
+                    </ul>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Barbearia Kings - Todos os direitos reservados.</p>
+    </footer>
+<script>
+    const ul = document.getElementById("lista-aceitos");
+    let aceitos = JSON.parse(localStorage.getItem("aceitos")) || [];
+
+    function atualizarLista() {
+        ul.innerHTML = "";
+        if (aceitos.length === 0) {
+            ul.innerHTML = "<li class='card-vazio'>Nenhum agendamento confirmado na agenda.</li>";
+            return;
+        }
+
+        aceitos.sort((a, b) => a.Horario.localeCompare(b.Horario));
+
+        aceitos.forEach((item, index) => {
+            let li = document.createElement("li");
+            li.className = `agendamento-card status-${item.Status.toLowerCase()}`;
+            
+            li.dataset.cliente = item.Cliente;
+            li.dataset.horario = item.Horario;
+
+            const isPendente = item.Status === "Pendente";
+            const buttonClass = isPendente ? 'btn-status' : 'btn-status-reabrir';
+            const buttonText = isPendente ? '✓ Concluir Serviço' : '↩ Reabrir Horário';
+
+            li.innerHTML = `
+                <div class="card-header">
+                    <h3 class="cliente-nome">${item.Cliente}</h3>
+                    <span class="barbeiro-tag">${item.Barbeiro}</span>
+                </div>
+                <div class="card-body">
+                    <p><strong><i class="icon-horario"></i> Horário:</strong> ${item.Horario}</p>
+                    <p><strong><i class="icon-status"></i> Status:</strong> ${item.Status}</p>
+                </div>
+                <div class="card-footer">
+                    <button class="btn-admin ${buttonClass}" onclick="alternar(this)">${buttonText}</button>
+                </div>`;
+            ul.appendChild(li);
+        });
+    }
+
+    function alternar(buttonElement) {
+        const card = buttonElement.closest('.agendamento-card');
+        const cliente = card.dataset.cliente;
+        const horario = card.dataset.horario;
+
+        const originalIndex = aceitos.findIndex(item => item.Cliente === cliente && item.Horario === horario);
+
+        if (originalIndex === -1) return;
+
+        if (aceitos[originalIndex].Status === "Pendente") {
+            aceitos[originalIndex].Status = "Concluido";
+        } else {
+            aceitos.splice(originalIndex, 1);
+        }
+        
+        localStorage.setItem("aceitos", JSON.stringify(aceitos));
+        atualizarLista();
+    }
+
+    atualizarLista();
+</script>
+</body>
+</html>

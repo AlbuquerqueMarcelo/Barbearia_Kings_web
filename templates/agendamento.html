@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agendamento - Barbearia Kings</title>
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/style.css"> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <h1><a href="/index.html">Barbearia Kings 💈 </h1> </a>
+        <h1><a href="../index.html">Barbearia Kings 💈</a></h1>
         <nav>
             <ul>
                 <li><a href="cortes.html">Cortes</a></li>
@@ -23,7 +23,8 @@
     <main>
         <section id="agendamento-pagina">
             <h2>Agende seu Horário</h2>
-            <form>
+            <form id="formulario-agendamento" onsubmit="return false;">
+                
                 <fieldset>
                     <legend>Escolha o Barbeiro</legend>
                     <div class="radio-group">
@@ -37,64 +38,85 @@
                         </div>
                     </div>
                 </fieldset>
-                
-                <label for="nome">Nome Completo</label>
-                <input type="text" id="nome" name="nome" required>
 
-                <label for="telefone">Telefone (WhatsApp)</label>
-                <input type="tel" id="telefone" name="telefone" required>
+                <label for="nome">Seu Nome Completo</label>
+                <input type="text" id="nome" name="nome" required placeholder="Digite seu nome">
 
-                <label for="data">Data</label>
-                <input type="date" id="data" name="data" required>
+                <label for="telefone">Seu Telefone (WhatsApp)</label>
+                <input type="tel" id="telefone" name="telefone" required placeholder="(XX) 9XXXX-XXXX">
 
-                <label for="hora">Hora</label>
-                <input type="time" id="hora" name="hora" required>
+                <fieldset>
+                    <legend>Horários Disponíveis</legend>
+                    <div class="tabela-horarios-container">
+                        <table id="tabela-horarios">
+                            <thead>
+                                <tr>
+                                    <th>Horário</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                </tbody>
+                        </table>
+                    </div>
+                </fieldset>
 
-                <button type="submit">Confirmar Agendamento</button>
             </form>
             <div class="voltar-link">
-                <a href="index.html">&larr; Voltar para a página inicial</a>
+                <a href="../index.html">&larr; Voltar para a página inicial</a>
             </div>
         </section>
     </main>
     <footer>
         <p>&copy; 2025 Barbearia Kings - Todos os direitos reservados.</p>
         <p>Contato: (XX) 9XXXX-XXXX | Siga-nos: @barbeariakings10</p>
+        <p style="margin-top: 10px; font-size: 0.8rem;"><a href="admin_pedidos.html" style="color: var(--cinza-claro);">Admin</a></p>
     </footer>
-    <script>
-  document.querySelector('#agendamento-pagina form').addEventListener('submit', function(e) {
-    e.preventDefault(); // Impede o envio padrão do formulário
 
-    // Captura os valores do formulário
-    const nome = document.getElementById('nome').value;
-    const telefone = document.getElementById('telefone').value;
-    const data = document.getElementById('data').value;
-    const hora = document.getElementById('hora').value;
-    const barbeiro = document.querySelector('input[name="barbeiro"]:checked').value;
+<script>
+    const form = document.getElementById("formulario-agendamento");
+    // Lista de horários de atendimento
+    const horarios = ["08:00","08:35","09:10","09:45","10:20","10:55","11:30","14:00","14:35","15:10","15:45","16:20","16:55","17:30"];
+    const tabelaBody = document.querySelector("#tabela-horarios tbody");
 
-    // Formata a mensagem (use %0A para quebras de linha e * para negrito no WhatsApp)
-    const mensagem = `*NOVO AGENDAMENTO*%0A%0A` +
-                     `*Cliente:* ${nome}%0A` +
-                     `*Telefone:* ${telefone}%0A` +
-                     `*Barbeiro:* ${barbeiro}%0A` +
-                     `*Data:* ${formatarData(data)}%0A` +
-                     `*Horário:* ${hora}`;
+    function atualizarTabela() {
+        tabelaBody.innerHTML = "";
+        let aceitos = JSON.parse(localStorage.getItem("aceitos")) || [];
 
-    // Número do WhatsApp do barbeiro (substitua pelo número real)
-    const numeroWhatsApp = "558881862286"; 
+        horarios.forEach(h => {
+            if (aceitos.some(a => a.Horario === h)) {
+                return; 
+            }
 
-    // Gera o link do WhatsApp
-    const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagem}`;
+            let linha = document.createElement("tr");
+            linha.innerHTML = `<td>${h}</td> 
+            <td><button type="button" class="btn-agendar" onclick="enviarAgendamento('${h}')">Agendar</button></td>`;
+            tabelaBody.appendChild(linha);
+        });
+    }
 
-    // Redireciona para o WhatsApp
-    window.location.href = urlWhatsApp;
-  });
+    function enviarAgendamento(horario) {
+        const nome = document.getElementById("nome").value;
+        const numero = document.getElementById("telefone").value;
+        const barbeiro = document.querySelector('input[name="barbeiro"]:checked').value;
 
-  // Função para formatar data (DD/MM/AAAA)
-  function formatarData(data) {
-    const [ano, mes, dia] = data.split('-');
-    return `${dia}/${mes}/${ano}`;
-  }
+        if (!nome || !numero) {
+            alert("Por favor, preencha seu nome e telefone para continuar.");
+            return;
+        }
+
+        let agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || [];
+        // Agora salvamos o barbeiro junto com os outros dados
+        agendamentos.push({ Cliente: nome, Numero: numero, Horario: horario, Barbeiro: barbeiro });
+        
+        localStorage.setItem("agendamentos", JSON.stringify(agendamentos));
+
+        alert("Seu pedido de agendamento foi enviado! Aguarde a confirmação via WhatsApp.");
+        
+        form.reset();
+    }
+
+    atualizarTabela();
 </script>
 </body>
 </html>
